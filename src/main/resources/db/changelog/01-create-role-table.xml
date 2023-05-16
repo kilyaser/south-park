@@ -9,10 +9,9 @@
             <column autoIncrement="true" name="id" type="bigint">
                 ‹constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="role_name" type="varchar(255)">
+            <column name="role_name" type="varchar(70)">
                 ‹constraints nullable="false"/>
             </column>
-
         </createTable>
     </changeSet>
 

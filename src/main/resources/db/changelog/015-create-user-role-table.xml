@@ -4,14 +4,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="create_material_table" author="VMeloshnikov">
-        <createTable tableName="material">
-            <column autoIncrement="true" name="id" type="bigint">
-                ‹constraints primaryKey="true" nullable="false"/>
+    <changeSet id="create_user_role_table" author="VMeloshnikov">
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                ‹constraints nullable="false"/>
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="role_id" type="bigint">
                 ‹constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
+
 </databaseChangeLog>
