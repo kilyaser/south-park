@@ -3,15 +3,22 @@ package com.aston.southpark.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.GenerationType;
 import java.util.Collection;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "user")
+@Table(name = "user", schema = "south_park")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
