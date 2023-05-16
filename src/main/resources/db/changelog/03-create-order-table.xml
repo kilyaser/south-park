@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="create-order-table" author="VMeloshnikov">
+    <changeSet id="create_order_table" author="VMeloshnikov">
         <createTable tableName="order">
             <column autoIncrement="true" name="id" type="bigint">
                 ‹constraints primaryKey="true" nullable="false"/>
@@ -19,24 +19,26 @@
                 <constraints nullable="false"/>
             </column>
             <column name="modified" type="TIMESTAMP WITH TIME ZONE">
-
             </column>
             <column name="stage" type="varchar(255)">
                 ‹constraints nullable="false"/>
             </column>
-            <column name="total_cost" type="bigint">
+            <column name="total_cost" type="Decimal">
                 ‹constraints nullable="false"/>
             </column>
             <column name="task" type="bigint">
                 ‹constraints nullable="false"/>
             </column>
-            <column name="orderitems" type="bigint">
+            <column name="order_items" type="bigint">
                 ‹constraints nullable="false"/>
             </column>
             <column name="order_title" type="varchar(255)">
                 ‹constraints nullable="false"/>
             </column>
             <column name="is_complected" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="payment" type="bigint">
                 <constraints nullable="true"/>
             </column>
         </createTable>
