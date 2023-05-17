@@ -18,13 +18,13 @@ import java.util.Collection;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "user", schema = "south_park")
+@Table(name = "user", schema = "public")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "username", unique = true)
+    @Column(name = "user_name", unique = true)
     private String username;
     @Column(name = "password")
     private String password;
