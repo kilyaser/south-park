@@ -3,7 +3,6 @@ package com.aston.southpark.controller;
 import com.aston.southpark.model.AccountCredentials;
 import com.aston.southpark.service.JwtService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class LoginController {
     private final JwtService jwtService;
     private final DaoAuthenticationProvider authenticationProvider;
@@ -25,7 +23,6 @@ public class LoginController {
         Authentication auth = authenticationProvider.authenticate(creds);
         UserDetails user = (UserDetails) auth.getPrincipal();
         String jwts = jwtService.getToken(user);
-        log.info("jwt token: {}", jwts);
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwts)
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")

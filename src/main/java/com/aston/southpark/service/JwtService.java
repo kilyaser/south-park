@@ -4,13 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Date;
@@ -20,7 +18,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class JwtService {
     static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     static final String PREFIX = "Bearer";
@@ -28,7 +25,6 @@ public class JwtService {
 
     public String getToken(UserDetails user) {
         String username = user.getUsername();
-        log.info("username from userDetails - {}", username);
         List<String> authorities = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         Map<String, Object> claims = new HashMap<>(Map.of("authority", authorities));
@@ -56,7 +52,6 @@ public class JwtService {
         return null;
     }
     public List<GrantedAuthority> getAuthority(String token) {
-        log.info("token from getAuthority() {}", token);
         List<String> authority = (List<String>) getAllClaimsFromToken(token.replace(PREFIX, "")).get("authority");
         return authority.stream()
                 .map(SimpleGrantedAuthority::new)
