@@ -8,6 +8,7 @@ import org.springframework.scheduling.config.Task;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -44,7 +45,7 @@ public class Order {
     private boolean isComplected;
 
     @OneToMany(mappedBy = "customer")
-    private List<Payment> payment;
+    private List<Payment> payment = new ArrayList<>();
 
     @PrePersist
     public void onCreate() {
