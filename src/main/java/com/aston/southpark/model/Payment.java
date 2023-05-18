@@ -25,16 +25,16 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Customer customer;
 
-    @Column(name = "order", nullable = false)
+    @Column(name = "order")
     private Order order;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private BigDecimal amount;
 
 //    @OneToMany

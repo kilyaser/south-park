@@ -8,7 +8,6 @@ import org.springframework.scheduling.config.Task;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,36 +19,38 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "customer", nullable = false)
+    @Column(name = "customer")
     @ManyToOne
+    @JoinColumn(name = "customer")
     private Customer customer;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")
     private LocalDateTime created;
 
-    @Column(name = "modified", nullable = false)
+    @Column(name = "modified")
     private LocalDateTime modified;
 
-    @Column(name = "total_cost", nullable = false)
+    @Column(name = "total_cost")
     private BigDecimal totalCost;
 
-    @Column(name = "completion", nullable = false)
+    @Column(name = "completion")
     private LocalDateTime completion;
 
-    @Column(name = "order_title", nullable = false)
+    @Column(name = "order_title")
     private String orderTitle;
 
     private boolean isComplected;
 
     @OneToMany(mappedBy = "customer")
-    private List<Payment> payment = new ArrayList<>();
+    private List<Payment> payment;
 
     @PrePersist
     public void onCreate() {
         created = LocalDateTime.now();
+        modified = LocalDateTime.now();
     }
 
     @PreUpdate
@@ -57,6 +58,4 @@ public class Order {
         modified = LocalDateTime.now();
     }
 
-    public void addTask(Task task) {
-    }
 }
