@@ -3,16 +3,12 @@ package com.aston.southpark.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.scheduling.config.Task;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -29,18 +25,37 @@ public class Order {
     @Column(name = "customer", nullable = false)
     @ManyToOne
     private Customer customer;
+
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
+
     @Column(name = "modified", nullable = false)
     private LocalDateTime modified;
+
     @Column(name = "total_cost", nullable = false)
     private BigDecimal totalCost;
+
     @Column(name = "completion", nullable = false)
     private LocalDateTime completion;
 
     @Column(name = "order_title", nullable = false)
     private String orderTitle;
+
     private boolean isComplected;
 
-    private Payment payment;
+    @OneToMany(mappedBy = "customer")
+    private List<Payment> payment;
+
+    @PrePersist
+    public void onCreate() {
+        created = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        modified = LocalDateTime.now();
+    }
+
+    public void addTask(Task task) {
+    }
 }
