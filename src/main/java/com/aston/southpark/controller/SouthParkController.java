@@ -12,4 +12,9 @@ public class SouthParkController {
     public String getSouthParkHello(){
         return "This is South Park project";
     }
+
+    @GetMapping("/secured")
+    public String getSecuredData() {
+        return "This is very sensitive information, only for authorized users";
+    }
 }
