@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1")
 public class SouthParkController {
     @GetMapping
-    public String getSouthParkHello(){
+    public String getSouthParkHello() {
         return "This is South Park project";
     }
 

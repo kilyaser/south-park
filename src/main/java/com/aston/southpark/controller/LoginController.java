@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     private final JwtService jwtService;
     private final DaoAuthenticationProvider authenticationProvider;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
         UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
