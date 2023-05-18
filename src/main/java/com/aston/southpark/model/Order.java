@@ -20,13 +20,16 @@ public class Order {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
     private Customer customer;
     private LocalDateTime created;
     private LocalDateTime modified;
     private BigDecimal totalCost;
     private LocalDateTime completion;
 
+    @Column(name = "order_title", nullable = false)
     private String orderTitle;
     private boolean isComplected;
+
     private Payment payment;
 }
