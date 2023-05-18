@@ -2,8 +2,6 @@
 
 --changeset init_tables:1 endDelimiter:/
 --comment встака данных
-create database southpark;
-
 insert into public.user(user_name, password, email) values ('Admin', '$2y$10$0iw5joKWfZs60TICdRjoD.Ca1O9vZRVsZ768nGZHlGWu83KBo0kqe', 'admin@mail.com');
 
 insert into public.user(user_name, password, email) values ('Manager', '$2y$10$0iw5joKWfZs60TICdRjoD.Ca1O9vZRVsZ768nGZHlGWu83KBo0kqe', 'manager@mail.com');
