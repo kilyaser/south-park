@@ -4,14 +4,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import java.util.Collection;
 
 @Entity
@@ -24,15 +26,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "user_name", unique = true)
     private String username;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "email")
     private String email;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 }
