@@ -36,10 +36,10 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "customer")
-    @ManyToOne
-    @JoinColumn(name = "customer")
-    private Customer customer;
+//    @Column(name = "customer")
+//    @ManyToOne
+//    @JoinColumn(name = "customer")
+//    private Customer customer;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -59,11 +59,11 @@ public class Order {
     @Column(name = "is_complected")
     private boolean isComplected;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
-
-    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)// вопрос
-    private List<Payment> payment;
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<OrderItem> orderItems;
+//
+//    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)// вопрос
+//    private List<Payment> payment;
 
     @PrePersist
     public void onCreate() {

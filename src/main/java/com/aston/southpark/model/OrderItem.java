@@ -30,8 +30,8 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "order_item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "order_item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Order> orders;
 
     @Column(name = "quantity")
     private int quantity;

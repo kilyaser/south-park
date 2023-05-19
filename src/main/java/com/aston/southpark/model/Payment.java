@@ -26,12 +26,12 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+//
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Customer customer;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Order order;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private Order order;
 
     @Column(name = "amount")
     private BigDecimal amount;
