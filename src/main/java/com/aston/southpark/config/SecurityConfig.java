@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/swagger/**").permitAll()
                 .regexMatchers(HttpMethod.POST, "/login").permitAll()
                 .regexMatchers("/api/v1").permitAll()
                 .anyRequest()
@@ -43,10 +44,12 @@ public class SecurityConfig {
                 .build();
 
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
