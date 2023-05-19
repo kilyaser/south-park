@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 import java.math.BigDecimal;
 
 @Entity
@@ -25,7 +25,7 @@ public class Payment {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
     @Column(name = "order")
@@ -33,8 +33,4 @@ public class Payment {
 
     @Column(name = "amount")
     private BigDecimal amount;
-
-//    @OneToMany
-//    private List<OrderItem> orderItems;
 }
-

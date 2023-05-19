@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.math.BigDecimal;
@@ -50,9 +52,13 @@ public class Order {
     @Column(name = "order_title")
     private String orderTitle;
 
+    @Column(name = "is_complected")
     private boolean isComplected;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)// вопрос
     private List<Payment> payment;
 
     @PrePersist
@@ -65,5 +71,4 @@ public class Order {
     public void onUpdate() {
         modified = LocalDateTime.now();
     }
-
 }
