@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/swagger/**").permitAll()
                 .regexMatchers(HttpMethod.POST, "/login").permitAll()
                 .regexMatchers("/api/v1").permitAll()
                 .anyRequest()
