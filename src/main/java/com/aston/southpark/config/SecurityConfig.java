@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/**").permitAll()
                 .regexMatchers(HttpMethod.POST, "/login").permitAll()
                 .regexMatchers("/api/v1").permitAll()
                 .anyRequest()
