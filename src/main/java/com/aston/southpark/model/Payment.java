@@ -28,7 +28,7 @@ public class Payment {
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    @Column(name = "order")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
 
     @Column(name = "amount")
