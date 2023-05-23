@@ -33,6 +33,13 @@ public class TechnologistServiceTest {
     }
 
     @Test
+    public void findAllTest() {
+        Long count = technologistService.getAll().stream().count();
+
+        assertNotEquals(0, count);
+    }
+
+    @Test
     public void createTest() {
         var techDto = new TechnologistDto();
         techDto.setName("new technologist");
@@ -81,7 +88,6 @@ public class TechnologistServiceTest {
                 () -> assertEquals("updated Ivan", updatedTech.getName()),
                 () -> assertEquals("updated@mail.ru", updatedTech.getEmail())
         );
-
 
     }
 
