@@ -53,8 +53,8 @@ public class Order {
     @Column(name = "completion")
     private LocalDateTime completion;
 
-    @Column(name = "order_title")
-    private String orderTitle;
+    @Column(name = "order_name")
+    private String name;
 
     @Column(name = "is_complected")
     private boolean isComplected;
