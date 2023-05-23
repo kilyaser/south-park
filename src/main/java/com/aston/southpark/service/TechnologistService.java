@@ -4,6 +4,7 @@ package com.aston.southpark.service;
 import com.aston.southpark.converters.TechnologistConverter;
 import com.aston.southpark.dto.TechnologistDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
+import com.aston.southpark.model.Technologist;
 import com.aston.southpark.repository.TechnologistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,18 +26,21 @@ public class TechnologistService {
         return technologistConverter.entityToDto(technologistRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with name = %s not found", name))));
     }
 
-    public void create(TechnologistDto dto) {
-        technologistRepository.save(technologistConverter.toEntity(dto));
+    public Technologist create(TechnologistDto dto) {
+        return technologistRepository.save(technologistConverter.toEntity(dto));
     }
 
     @Transactional
     public void remove(Long id) {
-        var technologist = technologistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with name = %d not found", id)));
         technologistRepository.delete(technologistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with id = %d not found", id))));
     }
 
+    @Transactional
     public void update(TechnologistDto dto) {
-        technologistRepository.save(technologistConverter.toEntity(dto));
+        var tech = technologistRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with id = %d not found", dto.getId())));
+        tech.setName(dto.getName());
+        tech.setEmail(dto.getEmail());
+        technologistRepository.save(tech);
     }
 
 
