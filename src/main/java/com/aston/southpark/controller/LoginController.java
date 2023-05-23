@@ -3,6 +3,7 @@ package com.aston.southpark.controller;
 import com.aston.southpark.model.AccountCredentials;
 import com.aston.southpark.service.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Bearer Authentication")
 public class LoginController {
     private final JwtService jwtService;
     private final DaoAuthenticationProvider authenticationProvider;
