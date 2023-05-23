@@ -26,6 +26,9 @@ public class Product {
 
     @Column(name = "end_date")
     private LocalDateTime endDate;
+    @ManyToOne
+    @JoinColumn(name = "technologist_id")
+    private Technologist technologist;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum")
