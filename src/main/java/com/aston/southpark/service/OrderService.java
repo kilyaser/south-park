@@ -26,7 +26,7 @@ public class OrderService {
     }
 
     public OrderDto getByName(String name) {
-        return orderConverter.mapToOrderDto(orderRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException(String.format("Order with order_title = %s not found", name))));
+        return orderConverter.mapToOrderDto(orderRepository.findByOrderTitle(name).orElseThrow(() -> new ResourceNotFoundException(String.format("Order with order_title = %s not found", name))));
     }
 
     public List<OrderDto> getAll() {
@@ -45,12 +45,11 @@ public class OrderService {
     @Transactional
     public void update(OrderDto dto) {
         Order order = orderRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id = %d not found", dto.getId())));
-        order.setId(dto.getId());
         order.setCreated(dto.getCreated());
         order.setModified(dto.getModified());
         order.setTotalCost(dto.getTotalCost());
         order.setCompletion(dto.getCompletion());
-        order.setName(dto.getOrderName());
+        order.setOrderTitle(dto.getOrderTitle());
         order.setComplected(dto.isComplected());
         orderRepository.save(order);
     }

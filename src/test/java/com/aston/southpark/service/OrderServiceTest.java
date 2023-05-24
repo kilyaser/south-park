@@ -16,6 +16,6 @@
 //    @Test
 //    public void getOrderByIdTest() {
 //        OrderDto orderDto = orderService.getById(1L);
-//        assertEquals("авто", orderDto.getOrderName());
+//        assertEquals("авто", orderDto.getOrderTitle());
 //    }
 //}

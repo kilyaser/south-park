@@ -1,6 +1,3 @@
-
-
-
 package com.aston.southpark.model;
 
 import lombok.Getter;
@@ -14,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -36,7 +31,6 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -53,15 +47,15 @@ public class Order {
     @Column(name = "completion")
     private LocalDateTime completion;
 
-    @Column(name = "order_name")
-    private String name;
+    @Column(name = "order_title")
+    private String orderTitle;
 
     @Column(name = "is_complected")
     private boolean isComplected;
 
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<OrderItem> orderItems;
-//
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
+
     @OneToMany(mappedBy = "order")
     private List<Payment> payment;
 

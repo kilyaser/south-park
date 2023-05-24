@@ -20,7 +20,9 @@ public class OrderDto {
 
     private LocalDateTime completion;
 
-    private String orderName;
+    private String orderTitle;
 
     private boolean isComplected;
+
+    private CustomerDto customerDto;
 }

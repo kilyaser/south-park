@@ -2,9 +2,10 @@ package com.aston.southpark.converters;
 
 import com.aston.southpark.dto.OrderItemDto;
 import com.aston.southpark.model.OrderItem;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class OrderItemConverter {
 
 
