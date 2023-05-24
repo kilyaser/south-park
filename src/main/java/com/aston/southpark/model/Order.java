@@ -36,10 +36,10 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-//    @Column(name = "customer")
-//    @ManyToOne
-//    @JoinColumn(name = "customer")
-//    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -62,8 +62,8 @@ public class Order {
 //    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<OrderItem> orderItems;
 //
-//    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)// вопрос
-//    private List<Payment> payment;
+    @OneToMany(mappedBy = "order")
+    private List<Payment> payment;
 
     @PrePersist
     public void onCreate() {
