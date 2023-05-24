@@ -30,5 +30,4 @@ public class Technologist {
     private String email;
     @OneToMany(mappedBy = "technologist")
     private List<Product> products;
-
 }

@@ -1,3 +1,6 @@
+
+
+
 package com.aston.southpark.model;
 
 import lombok.Getter;
@@ -11,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -30,6 +35,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

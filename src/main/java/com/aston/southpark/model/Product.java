@@ -27,22 +27,35 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "is_program_written")
+    @Column(name = "product_title", nullable = false)
+    @NotBlank
+    @Size(max = 255)
+    private String productTitle;
+
+    @Column(name = "product_type", nullable = false)
+    @NotBlank
+    @Size(max = 70)
+    private String productType;
+
+    @Column(name = "written_program", nullable = false)
     private boolean isProgramWritten;
 
-//    @Column(name = "material")
-//    private Material material;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "material_id")
+    private Material material;
 
     @Column(name = "end_date")
     private LocalDateTime endDate;
-    @ManyToOne
-    @JoinColumn(name = "technologist_id")
-    private Technologist technologist;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum")
+    @Column(name = "preparation", columnDefinition = "enum")
     private Preparation preparation;
 
 //    @OneToMany(mappedBy = "product")
 //    private List<OrderItem> orderItem;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "technologist_id")
+    private Technologist technologist;
+
 }
