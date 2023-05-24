@@ -63,7 +63,7 @@ public class Order {
     private List<OrderItem> orderItems;
 
     @OneToMany(mappedBy = "order")
-    private List<Payment> payment;
+    private List<Payment> payments;
 
     @PrePersist
     public void onCreate() {

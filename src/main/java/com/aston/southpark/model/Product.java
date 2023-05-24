@@ -11,10 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.FetchType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -51,8 +56,8 @@ public class Product {
     @Column(name = "preparation", columnDefinition = "enum")
     private Preparation preparation;
 
-//    @OneToMany(mappedBy = "product")
-//    private List<OrderItem> orderItem;
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "technologist_id")
