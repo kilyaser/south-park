@@ -8,23 +8,23 @@
             <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="created" type="time">
+            <column name="created" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="modified" type="time">
+            <column name="modified" type="date">
                 <constraints nullable="false"/>
             </column>
             <column name="total_cost" type="Decimal">
                 <constraints nullable="false"/>
             </column>
-            <column name="completion" type="time">
+            <column name="completion" type="date">
                 <constraints nullable="false"/>
             </column>
             <column name="order_name" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
             <column name="is_complected" type="boolean">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
