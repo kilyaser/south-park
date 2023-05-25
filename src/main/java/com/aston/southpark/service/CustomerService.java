@@ -43,7 +43,7 @@ public class CustomerService {
     public void update(CustomerDto customerDto) {
         Customer customer = customerRepository.findById(customerDto.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", customerDto.getId())));
-        customer.setOrders((List<Order>) orderConverter.toEntity(customerDto.getOrderDto()));
+        customer.setOrders((List<Order>) orderConverter.mapToOrderEntity(customerDto.getOrderDto()));
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
         customer.setPhone(customerDto.getPhone());

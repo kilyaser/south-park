@@ -1,12 +1,7 @@
 package com.aston.southpark.dto;
 
-import com.aston.southpark.model.Material;
-import com.aston.southpark.model.Preparation;
-import com.aston.southpark.model.Technologist;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 

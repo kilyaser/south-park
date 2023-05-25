@@ -57,11 +57,11 @@ public class Order {
     @Column(name = "is_complected")
     private boolean isComplected;
 
-    //    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<OrderItem> orderItems;
-//
     @OneToMany(mappedBy = "order")
-    private List<Payment> payment;
+    private List<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "order")
+    private List<Payment> payments;
 
     @PrePersist
     public void onCreate() {
