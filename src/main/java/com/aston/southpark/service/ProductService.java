@@ -5,7 +5,7 @@ import com.aston.southpark.dto.ProductDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.Product;
 import com.aston.southpark.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,17 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ProductService {
-
-    ProductRepository repository;
-    ProductConverter converter;
-
-    @Autowired
-    public ProductService(ProductRepository repository, ProductConverter converter) {
-        this.repository = repository;
-        this.converter = converter;
-    }
+    private final ProductRepository repository;
+    private final ProductConverter converter;
 
     public ProductDto getById(Long id) {
         Product product = repository.findById(id)

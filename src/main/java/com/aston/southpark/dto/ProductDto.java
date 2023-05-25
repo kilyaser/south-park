@@ -8,20 +8,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class ProductDto {
-
     private Long id;
-
     private String productTitle;
-
     private String productType;
-
     private boolean isProgramWritten;
-
-    private String material;
-
+    private MaterialDto materialDto;
     private LocalDateTime endDate;
-
     private String preparation;
-
-    private String technologist;
+    private TechnologistDto technologistDto;
 }

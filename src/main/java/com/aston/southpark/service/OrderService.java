@@ -21,12 +21,8 @@ public class OrderService {
     private final OrderConverter orderConverter;
 
     public OrderDto getById(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id = %d not found", id)));
-        return orderConverter.mapToOrderDto(order);
-    }
-
-    public OrderDto getByName(String name) {
-        return orderConverter.mapToOrderDto(orderRepository.findByOrderTitle(name).orElseThrow(() -> new ResourceNotFoundException(String.format("Order with order_title = %s not found", name))));
+        return orderConverter.mapToOrderDto(orderRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(String.format("Order with id = %d not found", id))));
     }
 
     public List<OrderDto> getAll() {

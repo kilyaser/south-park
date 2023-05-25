@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MaterialService {
 
-    private MaterialRepository materialRepository;
-    private MaterialConverter materialConverter;
+    private final MaterialRepository materialRepository;
+    private final MaterialConverter materialConverter;
 
     public Material create(MaterialDto materialDto) {
         return materialRepository.save(materialConverter.toEntity(materialDto));
     }
 
-    public Material getById(Long id) {
-        return materialRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", id)));
+    public MaterialDto getById(Long id) {
+        return materialConverter.toDto(materialRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", id))));
     }
 
     @Transactional
