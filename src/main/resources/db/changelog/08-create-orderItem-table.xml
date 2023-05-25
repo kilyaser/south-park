@@ -22,9 +22,9 @@
                 <constraints foreignKeyName="order_item_order_id_fk" references="order(id)"/>
             </column>
 
-<!--            <column name="product_id" type="bigint">-->
-<!--                <constraints foreignKeyName="order_item_product_id_fk" references="product(id)"/>-->
-<!--            </column>-->
+            <column name="product_id" type="bigint">
+                <constraints foreignKeyName="order_item_product_id_fk" references="product(id)"/>
+            </column>
 
         </createTable>
     </changeSet>
