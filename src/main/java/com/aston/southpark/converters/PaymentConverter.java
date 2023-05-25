@@ -20,8 +20,8 @@ public class PaymentConverter {
     public Payment toEntity(PaymentDto dto) {
         var payment = new Payment();
         if (dto.getId() != 0) payment.setId(dto.getId());
-        payment.setCustomer(null);                              //FIXME: Реализовать после того как будет реализовать CustomerDto и CustomerConverter
-        payment.setOrder(null);                                 //FiXME: Реализовать после того как будет реализовать OrderDto и OrderConverter
+        payment.setCustomer(null);                              //FIXME: Реализовать после того как будет реализован CustomerDto и CustomerConverter
+        payment.setOrder(null);                                 //FiXME: Реализовать после того как будет реализован OrderDto и OrderConverter
         payment.setAmount(dto.getAmount());
         return payment;
     }
@@ -29,8 +29,8 @@ public class PaymentConverter {
     public PaymentDto toDto(Payment payment) {
         var dto = new PaymentDto();
         dto.setId(payment.getId());
-        dto.setCustomerDto(null);               //FIXME: Реализовать после того как будет реализовать CustomerDto и CustomerConverter
-        dto.setOrderDto(null);                  //FiXME: Реализовать после того как будет реализовать OrderDto и OrderConverter
+        dto.setCustomerDto(null);               //FIXME: Реализовать после того как будет реализован CustomerDto и CustomerConverter
+        dto.setOrderDto(null);                  //FiXME: Реализовать после того как будет реализован OrderDto и OrderConverter
         dto.setAmount(payment.getAmount());
         return dto;
 
