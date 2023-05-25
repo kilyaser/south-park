@@ -35,9 +35,9 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
-//    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
-//    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Payment> payments;
+    @OneToMany(mappedBy = "customer")
+    private List<Payment> payments;
 }
