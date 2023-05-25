@@ -3,7 +3,6 @@ package com.aston.southpark.service;
 import com.aston.southpark.converters.MaterialConverter;
 import com.aston.southpark.dto.MaterialDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
-import com.aston.southpark.model.Customer;
 import com.aston.southpark.model.Material;
 import com.aston.southpark.repository.MaterialRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +37,5 @@ public class MaterialService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", materialDto.getId())));
         material.setType(materialDto.getType());
     }
-
 
 }

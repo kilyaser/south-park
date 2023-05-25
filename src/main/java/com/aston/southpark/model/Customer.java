@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
 import java.util.List;
 
 @Entity

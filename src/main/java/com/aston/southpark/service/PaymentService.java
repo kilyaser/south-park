@@ -41,7 +41,7 @@ public class PaymentService {
     @Transactional
     public void update(PaymentDto dto) {
         var payment = paymentRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Payment with id = %d not found", dto.getId())));
-        payment.setOrder(orderConverter.toEntity(dto.getOrderDto()));
+        payment.setOrder(orderConverter.mapToOrderEntity(dto.getOrderDto()));
         payment.setCustomer(customerConverter.toEntity(dto.getCustomerDto()));
         payment.setAmount(dto.getAmount());
         paymentRepository.save(payment);
