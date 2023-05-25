@@ -3,12 +3,9 @@ package com.aston.southpark.service;
 import com.aston.southpark.converters.CustomerConverter;
 import com.aston.southpark.converters.OrderConverter;
 import com.aston.southpark.dto.CustomerDto;
-import com.aston.southpark.dto.PaymentDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
-import com.aston.southpark.mapper.CustomerMapper;
 import com.aston.southpark.model.Customer;
 import com.aston.southpark.model.Order;
-import com.aston.southpark.model.Payment;
 import com.aston.southpark.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,11 +25,11 @@ public class CustomerService {
         return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id: %d not found", id)));
     }
 
-    public Customer create (CustomerDto customerDto) {
+    public Customer create(CustomerDto customerDto) {
         return customerRepository.save(customerConverter.toEntity(customerDto));
     }
 
-    public void remove (Long id) {
+    public void remove(Long id) {
         customerRepository.delete(customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", id))));
     }
 
@@ -43,7 +40,7 @@ public class CustomerService {
     @Transactional
     public void update(CustomerDto customerDto) {
         Customer customer = customerRepository.findById(customerDto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", customerDto.getId())));
-        customer.setOrders((List<Order>) orderConverter.toEntity(customerDto.getOrderDto()));
+        customer.setOrders((List<Order>) orderConverter.mapToOrderEntity(customerDto.getOrderDto()));
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
         customer.setPhone(customerDto.getPhone());
