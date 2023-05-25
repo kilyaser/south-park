@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderItemService {
 
-    private OrderItemConverter orderItemConverter;
-    private OrderItemRepository orderItemRepository;
+    private final OrderItemConverter orderItemConverter;
+    private final OrderItemRepository orderItemRepository;
 
     public OrderItemDto getById(Long id) {
-        OrderItem orderItem = orderItemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("OrderItem with id = %d not found", id)));
-        return orderItemConverter.mapToOrderItemDto(orderItem);
+        return orderItemConverter.mapToOrderItemDto(orderItemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("OrderItem with id = %d not found", id))));
     }
 
     public List<OrderItemDto> getAll() {

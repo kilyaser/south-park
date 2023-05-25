@@ -4,7 +4,8 @@ import com.aston.southpark.dto.OrderDto;
 import com.aston.southpark.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 
 @Component
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class OrderConverter {
 
     private final CustomerConverter customerConverter;
+    private final OrderItemConverter orderItemConverter;
+    private final PaymentConverter paymentConverter;
 
     public OrderDto mapToOrderDto(Order order) {
         var dto = new OrderDto();
@@ -23,6 +26,8 @@ public class OrderConverter {
         dto.setOrderTitle(order.getOrderTitle());
         dto.setComplected(order.isComplected());
         dto.setCustomerDto(customerConverter.toDto(order.getCustomer()));
+        dto.setOrderItemDtos(order.getOrderItems().stream().map(orderItemConverter::mapToOrderItemDto).collect(Collectors.toList()));
+        dto.setPaymentDtos(order.getPayments().stream().map(paymentConverter::toDto).collect(Collectors.toList()));
         return dto;
     }
 
@@ -36,6 +41,8 @@ public class OrderConverter {
         order.setOrderTitle(orderDto.getOrderTitle());
         order.setComplected(orderDto.isComplected());
         order.setCustomer(customerConverter.toEntity(orderDto.getCustomerDto()));
+        order.setOrderItems(orderDto.getOrderItemDtos().stream().map(orderItemConverter::mapToOrderItemEntity).collect(Collectors.toList()));
+        order.setPayments(orderDto.getPaymentDtos().stream().map(paymentConverter::toEntity).collect(Collectors.toList()));
         return order;
     }
 }

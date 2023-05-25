@@ -44,10 +44,7 @@ public class TechnologistService {
 
     @Transactional
     public void update(TechnologistDto dto) {
-        var tech = technologistRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with id = %d not found", dto.getId())));
-        tech.setName(dto.getName());
-        tech.setEmail(dto.getEmail());
-        technologistRepository.save(tech);
+        technologistRepository.save(technologistConverter.toEntity(dto));
     }
 
 
