@@ -1,7 +1,5 @@
 package com.aston.southpark.service;
 
-import com.aston.southpark.converters.CustomerConverter;
-import com.aston.southpark.converters.OrderConverter;
 import com.aston.southpark.converters.PaymentConverter;
 import com.aston.southpark.dto.PaymentDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
@@ -18,9 +16,6 @@ import java.util.List;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentConverter paymentConverter;
-    private final OrderConverter orderConverter;
-    private final CustomerConverter customerConverter;
-
 
     public Payment create(PaymentDto dto) {
         return paymentRepository.save(paymentConverter.toEntity(dto));
@@ -39,15 +34,11 @@ public class PaymentService {
         paymentRepository.delete(paymentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Payment with id = %d not found", id))));
     }
     @Transactional
-    public void update(PaymentDto dto) {
-        var payment = paymentRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Payment with id = %d not found", dto.getId())));
-        payment.setOrder(orderConverter.mapToOrderEntity(dto.getOrderDto()));
-        payment.setCustomer(customerConverter.toEntity(dto.getCustomerDto()));
-        payment.setAmount(dto.getAmount());
-        paymentRepository.save(payment);
+    public Payment update(PaymentDto dto) {
+        return paymentRepository.save(paymentConverter.toEntity(dto));
     }
 
-    //TODO: написать тесты ко всем методам после реализации Order и Customer классов их сервисов и ковертеров
+
 
 
 }

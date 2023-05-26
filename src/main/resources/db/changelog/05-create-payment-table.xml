@@ -15,7 +15,7 @@
             <column name="order_id" type="bigint">
                 <constraints foreignKeyName="payment_order_id_fk" references="order(id)"/>
             </column>
-            <column name="amount" type="numeric(12,5)">
+            <column name="amount" type="numeric(12,2)">
                 <constraints nullable="false"/>
             </column>
 

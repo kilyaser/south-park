@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -28,15 +26,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "order")
+@Table(name = "order", schema = "public")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -74,5 +70,21 @@ public class Order {
     @PreUpdate
     public void onUpdate() {
         modified = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", totalCost=" + totalCost +
+                ", completion=" + completion +
+                ", orderTitle='" + orderTitle + '\'' +
+                ", isComplected=" + isComplected +
+                ", orderItems=" + orderItems +
+                ", payments=" + payments +
+                '}';
     }
 }

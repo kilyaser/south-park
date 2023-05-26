@@ -27,12 +27,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="technologist_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="product" baseColumnNames="material_id"
+        <addForeignKeyConstraint deleteCascade="true" baseTableName="product" baseColumnNames="material_id"
                                  referencedTableName="material" referencedColumnNames="id" constraintName="material_fk"/>
-        <addForeignKeyConstraint baseTableName="product" baseColumnNames="technologist_id"
+        <addForeignKeyConstraint deleteCascade="true" baseTableName="product" baseColumnNames="technologist_id"
                                  referencedTableName="technologist" referencedColumnNames="id" constraintName="technologist_fk"/>
     </changeSet>
 

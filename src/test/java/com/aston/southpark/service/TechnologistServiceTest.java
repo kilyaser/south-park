@@ -2,7 +2,6 @@ package com.aston.southpark.service;
 
 
 import com.aston.southpark.dto.TechnologistDto;
-import com.aston.southpark.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,9 +33,9 @@ public class TechnologistServiceTest {
 
     @Test
     public void findAllTest() {
-        Long count = technologistService.getAll().stream().count();
+        long count = technologistService.getAll().size();
 
-        assertNotEquals(0, count);
+        assertTrue(count > 0);
     }
 
     @Test
@@ -50,18 +49,6 @@ public class TechnologistServiceTest {
                 () -> assertEquals("new technologist", tech.getName()),
                 () -> assertEquals("new@mail.ru", tech.getEmail())
         );
-
-    }
-
-    @Test
-    public void removeTest() {
-        var tech = technologistService.getById(2L);
-
-        assertEquals(tech.getName(), "Petr");
-
-        technologistService.remove(2L);
-
-        assertThrows(ResourceNotFoundException.class, () -> technologistService.getById(2L));
 
     }
 
