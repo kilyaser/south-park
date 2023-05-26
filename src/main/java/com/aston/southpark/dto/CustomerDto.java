@@ -1,9 +1,9 @@
 package com.aston.southpark.dto;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @NoArgsConstructor

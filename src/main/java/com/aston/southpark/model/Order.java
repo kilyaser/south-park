@@ -26,7 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "order")
+@Table(name = "order", schema = "public")
 public class Order {
 
     @Id
@@ -70,5 +70,21 @@ public class Order {
     @PreUpdate
     public void onUpdate() {
         modified = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", totalCost=" + totalCost +
+                ", completion=" + completion +
+                ", orderTitle='" + orderTitle + '\'' +
+                ", isComplected=" + isComplected +
+                ", orderItems=" + orderItems +
+                ", payments=" + payments +
+                '}';
     }
 }

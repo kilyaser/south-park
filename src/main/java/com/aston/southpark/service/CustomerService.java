@@ -5,7 +5,6 @@ import com.aston.southpark.converters.OrderConverter;
 import com.aston.southpark.dto.CustomerDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.Customer;
-import com.aston.southpark.model.Order;
 import com.aston.southpark.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,9 +20,9 @@ public class CustomerService {
     private final CustomerConverter customerConverter;
     private final OrderConverter orderConverter;
 
-    public CustomerDto getCustomerById(Long id) {
-        return customerConverter.toDto(customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id: %d not found", id))));
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id: %d not found", id)));
     }
 
     public Customer create(CustomerDto customerDto) {

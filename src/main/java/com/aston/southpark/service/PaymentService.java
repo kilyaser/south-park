@@ -34,13 +34,11 @@ public class PaymentService {
         paymentRepository.delete(paymentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Payment with id = %d not found", id))));
     }
     @Transactional
-    public void update(PaymentDto dto) {
-        var payment = paymentRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("Payment with id = %d not found", dto.getId())));
-        payment.setAmount(dto.getAmount());
-        paymentRepository.save(payment);
+    public Payment update(PaymentDto dto) {
+        return paymentRepository.save(paymentConverter.toEntity(dto));
     }
 
-    //TODO: написать тесты ко всем методам после реализации Order и Customer классов их сервисов и ковертеров
+
 
 
 }

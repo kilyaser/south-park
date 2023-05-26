@@ -2,7 +2,6 @@ package com.aston.southpark.service;
 
 
 import com.aston.southpark.dto.TechnologistDto;
-import com.aston.southpark.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
