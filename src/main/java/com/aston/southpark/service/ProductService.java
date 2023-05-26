@@ -18,21 +18,15 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductConverter productConverter;
 
-    public ProductDto getById(Long id) {
-        Product product = repository.findById(id)
+    public Product getById(Long id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id = %d not found", id)));
-        return productConverter.entityToDto(product);
-    }
 
-    public ProductDto getByTitle(String title){
-        Product product = repository.findByTitle(title)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with title = %s not found", title)));
-        return productConverter.entityToDto(product);
     }
 
     public List<ProductDto> getAll() {
         return repository.findAll().stream()
-                .map(p -> productConverter.entityToDto(p))
+                .map(productConverter::entityToDto)
                 .collect(Collectors.toList());
     }
 

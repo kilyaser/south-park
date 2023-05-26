@@ -12,8 +12,8 @@ public class ProductDto {
     private String productTitle;
     private String productType;
     private boolean isProgramWritten;
-    private MaterialDto materialDto;
+    private Long materialId;
     private LocalDateTime endDate;
     private String preparation;
-    private TechnologistDto technologistDto;
+    private Long technologistId;
 }

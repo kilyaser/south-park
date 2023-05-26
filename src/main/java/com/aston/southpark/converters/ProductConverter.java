@@ -3,44 +3,59 @@ package com.aston.southpark.converters;
 import com.aston.southpark.dto.ProductDto;
 import com.aston.southpark.model.Preparation;
 import com.aston.southpark.model.Product;
+import com.aston.southpark.model.ProductType;
+import com.aston.southpark.service.MaterialService;
+import com.aston.southpark.service.TechnologistService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductConverter {
-    private final TechnologistConverter technologistConverter;
-    private final MaterialConverter materialConverter;
+    private final TechnologistService technologistService;
+    private final MaterialService materialService;
 
     public ProductDto entityToDto(Product product) {
         ProductDto dto = new ProductDto();
         dto.setId(product.getId());
         dto.setProductTitle(product.getProductTitle());
-        dto.setProductType(product.getProductType());
+        dto.setProductType(product.getProductType().name());
         dto.setProgramWritten(product.isProgramWritten());
-        dto.setMaterialDto(materialConverter.toDto(product.getMaterial()));
+        dto.setMaterialId(product.getMaterial().getId());
         dto.setEndDate(product.getEndDate());
         dto.setPreparation(product.getPreparation().name());
-        dto.setTechnologistDto(technologistConverter.entityToDto(product.getTechnologist()));
+
+        if (Objects.nonNull(product.getTechnologist())) {
+            dto.setTechnologistId(product.getTechnologist().getId());
+        }
+
         return dto;
     }
 
     public Product toEntity(ProductDto dto) {
         Product product = new Product();
         product.setProductTitle(dto.getProductTitle());
-        product.setProductType(dto.getProductType());
+        product.setProductType(ProductType.valueOf(dto.getProductType()));
         product.setProgramWritten(dto.isProgramWritten());
-        product.setMaterial(materialConverter.toEntity(dto.getMaterialDto()));
         product.setPreparation(Preparation.valueOf(dto.getPreparation()));
-        product.setTechnologist(technologistConverter.toEntity(dto.getTechnologistDto()));
-        if (Objects.nonNull(dto.getEndDate())) {
-            product.setEndDate(dto.getEndDate());
+        product.setEndDate(dto.getEndDate());
+
+        if (Objects.nonNull(dto.getMaterialId())) {
+            product.setMaterial(materialService.getById(dto.getMaterialId()));
         }
+        if (Objects.nonNull(dto.getTechnologistId())) {
+            product.setTechnologist(technologistService.getById(dto.getTechnologistId()));
+        }
+
         if (Objects.nonNull(dto.getId())) {
             product.setId(dto.getId());
         }
+
         return product;
     }
 }

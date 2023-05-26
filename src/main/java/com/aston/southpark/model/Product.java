@@ -21,17 +21,14 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_title", nullable = false)
+    @Column(name = "product_title")
     @NotBlank
-    @Size(max = 255)
     private String productTitle;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_type", columnDefinition = "enum")
+    private ProductType productType;
 
-    @Column(name = "product_type", nullable = false)
-    @NotBlank
-    @Size(max = 70)
-    private String productType;
-
-    @Column(name = "written_program", nullable = false)
+    @Column(name = "written_program")
     private boolean isProgramWritten;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
@@ -52,4 +49,18 @@ public class Product {
     @JoinColumn(name = "technologist_id")
     private Technologist technologist;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productTitle='" + productTitle + '\'' +
+                ", productType=" + productType +
+                ", isProgramWritten=" + isProgramWritten +
+                ", material=" + material.getType() +
+                ", endDate=" + endDate +
+                ", preparation=" + preparation +
+                ", orderItems=" + orderItems +
+                ", technologist=" + technologist +
+                '}';
+    }
 }

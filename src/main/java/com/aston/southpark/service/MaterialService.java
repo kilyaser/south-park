@@ -20,9 +20,9 @@ public class MaterialService {
         return materialRepository.save(materialConverter.toEntity(materialDto));
     }
 
-    public MaterialDto getById(Long id) {
-        return materialConverter.toDto(materialRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", id))));
+    public Material getById(Long id) {
+        return materialRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", id)));
     }
 
     @Transactional

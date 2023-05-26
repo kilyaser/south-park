@@ -3,90 +3,86 @@ package com.aston.southpark.service;
 import com.aston.southpark.converters.ProductConverter;
 import com.aston.southpark.dto.ProductDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
-import com.aston.southpark.model.Material;
-import com.aston.southpark.model.Preparation;
-import com.aston.southpark.model.Technologist;
+import com.aston.southpark.model.*;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Slf4j
 class ProductServiceTest {
 
     @Autowired
     private ProductService productService;
-
     @Autowired
     private ProductConverter productConverter;
+
     @Test
-    void getById() {
+    void getByIdTest() {
 
         var productDB = productService.getById(1L);
 
         assertAll(
                 () -> assertEquals("pro1", productDB.getProductTitle()),
-                () -> assertEquals("type1", productDB.getProductType()),
+                () -> assertEquals(ProductType.NEW, productDB.getProductType()),
                 () -> assertTrue(productDB.isProgramWritten()),
-                () -> assertEquals(Preparation.NEW.name(), productDB.getPreparation())
+                () -> assertEquals(Preparation.NOT_DONE, productDB.getPreparation())
         );
     }
 
     @Test
-    void getAll() {
+    void getAllTest() {
         long count = productService.getAll().size();
         assertTrue(count > 0);
     }
 
     @Test
-    void create() {
+    void createUpdateTest() {
         ProductDto newProduct = new ProductDto();
-        Material material = new Material();
-        material.setId(1L);
-        material.setType("steel");
+        newProduct.setProductTitle("Cool product");
+        newProduct.setProductType("NEW");
+        newProduct.setPreparation("NOT_DONE");
+        newProduct.setMaterialId(2L);
 
-        Technologist technologist = new Technologist();
-        technologist.setId(1L);
-        technologist.setName("Ivan");
-        technologist.setEmail("ivan@mail.ru");
+        Product savedProduct = productService.createOrUpdate(newProduct);
 
-        newProduct.setProductTitle("newProd");
-        newProduct.setProductType("newType");
-        newProduct.setProgramWritten(true);
-        newProduct.setEndDate(null);
-        newProduct.setPreparation(Preparation.NEW.name());
+        assertAll(
+                () -> assertEquals("Cool product", savedProduct.getProductTitle()),
+                () -> assertEquals(Preparation.NOT_DONE, savedProduct.getPreparation()),
+                () -> assertEquals(2L, savedProduct.getMaterial().getId()),
+                () -> assertEquals(ProductType.NEW, savedProduct.getProductType()),
+                () -> assertFalse(savedProduct.isProgramWritten())
+        );
 
+        savedProduct.setProductTitle("Renamed Title");
+        savedProduct.setPreparation(Preparation.DONE);
 
-        productService.createOrUpdate(newProduct);
+        Product updatedPproduct = productService.createOrUpdate(productConverter.entityToDto(savedProduct));
 
-        ProductDto createdProduct = productService.getById(2L);
+        assertAll(
+                () -> assertEquals(savedProduct.getId(), updatedPproduct.getId()),
+                () -> assertEquals("Renamed Title", updatedPproduct.getProductTitle()),
+                () -> assertEquals(Preparation.DONE, updatedPproduct.getPreparation())
+        );
 
-        assertEquals(2, createdProduct.getId());
-        assertEquals(newProduct.getProductTitle(), createdProduct.getProductTitle());
-        assertEquals(newProduct.getProductType(), createdProduct.getProductType());
     }
 
     @Test
-    void update() {
+    void deleteTest() {
+        Product product = productService.getById(2L);
 
-//        ProductDto dtoToUpdate = productConverter.entityToDto(TEST_PROD);
-//        dtoToUpdate.setProductTitle("newTitle");
-//        dtoToUpdate.setProductType("newType");
-//
-//        productService.createOrUpdate(dtoToUpdate);
-//        ProductDto updatedDto = productService.getById(dtoToUpdate.getId());
-//
-//        assertEquals(dtoToUpdate.getProductTitle(), updatedDto.getProductTitle());
-//        assertEquals(dtoToUpdate.getProductType(), updatedDto.getProductType());
-    }
+        assertAll(
+                () -> assertEquals(2L, product.getId()),
+                () -> assertEquals("pro2", product.getProductTitle())
+        );
+        productService.remove(product.getId());
 
-    @Test
-    void delete() {
-//        productService.remove(TEST_PROD.getId());
-//
-//        assertThrows(ResourceNotFoundException.class, () -> productService.getById(TEST_PROD.getId()));
+        assertThrows(ResourceNotFoundException.class,
+                () -> productService.getById(2L));
+
     }
 }

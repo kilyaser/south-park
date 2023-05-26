@@ -20,9 +20,9 @@ public class TechnologistService {
     private final TechnologistRepository technologistRepository;
     private final TechnologistConverter technologistConverter;
 
-    public TechnologistDto getById(Long id) {
-        var technologist = technologistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with id = %d not found", id)));
-        return technologistConverter.entityToDto(technologist);
+    public Technologist getById(Long id) {
+        return technologistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Technologist with id = %d not found", id)));
+
     }
 
     public TechnologistDto getByName(String name) {
