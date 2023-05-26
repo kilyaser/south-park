@@ -6,17 +6,16 @@ package com.aston.southpark.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -30,8 +29,9 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-//    @OneToMany(mappedBy = "order_item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Order> orders;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @Column(name = "quantity")
     private int quantity;
@@ -41,4 +41,8 @@ public class OrderItem {
 
     @Column(name = "price_per_product")
     private BigDecimal pricePerProduct;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

@@ -1,9 +1,7 @@
 package com.aston.southpark.model;
 
 public enum Preparation {
-    NEW,
-    REPEAT,
-    CHANGE,
-    NOT_MAKE,
-    COOPERATION;
+    NOT_DONE,
+    IN_PROCESS,
+    DONE
 }
