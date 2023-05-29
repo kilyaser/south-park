@@ -12,23 +12,23 @@
             <column name="order_title" type="varchar(100)">
                 <constraints nullable="true"/>
             </column>
-            <column name="created" type="timestamp">
+            <column name="created" type="timestamp" defaultValue="now()">
                 <constraints nullable="true"/>
             </column>
-            <column name="modified" type="timestamp">
+            <column name="modified" type="timestamp" defaultValue="now()">
                 <constraints nullable="true"/>
             </column>
             <column name="total_cost" type="numeric(15,2)">
                 <constraints nullable="true"/>
             </column>
-            <column name="completion" type="timestamp">
+            <column name="completion" type="timestamp" defaultOnNull="true">
                 <constraints nullable="true"/>
             </column>
-            <column name="is_complected" type="boolean">
+            <column name="is_complected" type="boolean" defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
             <column name="customer_id" type="bigint">
-                <constraints nullable="true" foreignKeyName="order_customer_id_fk" references="customer(id)"/>
+                <constraints nullable="false" foreignKeyName="order_customer_id_fk" references="customer(id)"/>
             </column>
         </createTable>
 
