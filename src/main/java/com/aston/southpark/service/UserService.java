@@ -1,7 +1,6 @@
 package com.aston.southpark.service;
 
 import com.aston.southpark.exception.ResourceNotFoundException;
-import com.aston.southpark.model.Product;
 import com.aston.southpark.model.Role;
 import com.aston.southpark.model.User;
 import com.aston.southpark.repository.UserRepository;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

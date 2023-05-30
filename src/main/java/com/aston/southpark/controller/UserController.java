@@ -2,15 +2,11 @@ package com.aston.southpark.controller;
 
 import com.aston.southpark.converters.UserConverter;
 import com.aston.southpark.dto.UserDto;
-import com.aston.southpark.model.Role;
 import com.aston.southpark.model.User;
 import com.aston.southpark.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
