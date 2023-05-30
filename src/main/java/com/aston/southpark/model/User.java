@@ -3,6 +3,7 @@ package com.aston.southpark.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -37,7 +38,10 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //cascade.All убрал, иначе ошибки при удалении лезут, т.к. хибер пытается удалить все записи, в тч и роль,
+    // на которую ссылаются другие сущности. Без cascade удаляется все правильно, только из юзера и юзер_роле, при
+    // в таблице роли все остается не тронутым.
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
