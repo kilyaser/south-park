@@ -37,12 +37,13 @@ public class OrderItemService {
     }
 
     @Transactional
-    public void update(OrderItemDto dto) {
+    public OrderItemDto update(OrderItemDto dto) {
         OrderItem orderItem = orderItemRepository.findById(dto.getId()).orElseThrow(() -> new ResourceNotFoundException(String.format("OrderItem with id = %d not found", dto.getId())));
         orderItem.setId(dto.getId());
         orderItem.setQuantity(dto.getQuantity());
         orderItem.setPrice(dto.getPrice());
         orderItem.setPricePerProduct(dto.getPricePerProduct());
         orderItemRepository.save(orderItem);
+        return dto;
     }
 }

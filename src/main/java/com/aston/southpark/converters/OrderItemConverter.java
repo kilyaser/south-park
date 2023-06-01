@@ -25,7 +25,7 @@ public class OrderItemConverter {
         var orderItem = new OrderItem();
         orderItem.setId(dto.getId());
         orderItem.setQuantity(dto.getQuantity());
-        orderItem.setPricePerProduct(dto.getPrice());
+        orderItem.setPrice(dto.getPrice());
         orderItem.setPricePerProduct(dto.getPricePerProduct());
         orderItem.setProduct(productConverter.toEntity(dto.getProductDto()));
         return orderItem;
