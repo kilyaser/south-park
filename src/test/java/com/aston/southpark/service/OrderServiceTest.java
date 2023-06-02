@@ -1,7 +1,7 @@
 package com.aston.southpark.service;
 
-import com.aston.southpark.converters.OrderConverter;
-import com.aston.southpark.dto.OrderDto;
+
+import com.aston.southpark.model.Customer;
 import com.aston.southpark.model.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,10 @@ public class OrderServiceTest {
     @Test
     public void creatTest() {
         Order order = new Order();
+        Customer customer = new Customer();
+        customer.setId(1L);
+        order.setCustomer(customer);
+
         Order sevedOrder = orderService.create(order);
 
         assertTrue(Objects.nonNull(sevedOrder.getId()));

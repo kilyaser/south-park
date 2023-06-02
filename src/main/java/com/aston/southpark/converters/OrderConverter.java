@@ -18,6 +18,8 @@ public class OrderConverter {
     public OrderDto mapToOrderDto(Order order) {
         var dto = new OrderDto();
         dto.setId(order.getId());
+        dto.setCreated(order.getCreated());
+        dto.setModified(order.getModified());
         dto.setTotalCost(order.getTotalCost());
         dto.setCompletion(order.getCompletion());
         dto.setOrderTitle(order.getOrderTitle());
@@ -36,6 +38,8 @@ public class OrderConverter {
     public Order mapToOrderEntity(OrderDto orderDto) {
         var order = new Order();
         order.setId(orderDto.getId());
+        order.setCreated(orderDto.getCreated());
+        order.setModified(orderDto.getModified());
         order.setTotalCost(orderDto.getTotalCost());
         order.setCompletion(orderDto.getCompletion());
         order.setOrderTitle(orderDto.getOrderTitle());

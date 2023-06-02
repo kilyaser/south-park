@@ -3,13 +3,17 @@ package com.aston.southpark.controller;
 import com.aston.southpark.converters.PaymentConverter;
 import com.aston.southpark.dto.PaymentDto;
 import com.aston.southpark.service.PaymentService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Tag(name = "Payment controller", description = "Операции по работе с платежами")
 @RestController
 @RequestMapping("api/v1/payments")
 @SecurityRequirement(name = "Bearer Authentication")
@@ -19,8 +23,23 @@ public class PaymentController {
     private final PaymentService paymentService;
     private final PaymentConverter paymentConverter;
 
+    @Operation(summary = "Добавление платежа")
     @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
     public PaymentDto addPayment(@RequestBody PaymentDto dto) {
         return paymentConverter.toDto(paymentService.create(dto));
+    }
+
+    @Operation(summary = "Получить все платежи")
+    @GetMapping
+    public List<PaymentDto> getAllPayments() {
+        return paymentService.getAll().stream()
+                .map(paymentConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deletePayment(@PathVariable Long id) {
+        paymentService.remove(id);
     }
 }
