@@ -28,11 +28,13 @@ public class OrderService {
     }
 
     public Order create(Order order) {
+        order.onCreate();
         return orderRepository.save(order);
     }
 
     @Transactional
     public Order update(Order order) {
+        order.onUpdate();
        return orderRepository.save(order);
     }
 }
