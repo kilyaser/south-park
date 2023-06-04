@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/swagger/**").permitAll()
-                .antMatchers("/api/v1/users/").hasRole("ADMIN")
+                .antMatchers("/api/v1/users/**").hasRole("ADMIN")
                 .regexMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest()
                 .authenticated()
