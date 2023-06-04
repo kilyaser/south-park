@@ -15,18 +15,15 @@ public class UserServiceTest {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserConverter userConverter;
 
     @Test
     void getByNameTest() {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        User userBd = userService.getUserByUsername("Admin");
+        User userBd = userService.getUserByUsername("Manager");
 
         assertAll(
-                () -> assertEquals("Admin", userBd.getUsername()),
+                () -> assertEquals("Manager", userBd.getUsername()),
                 () -> assertEquals("$2y$10$0iw5joKWfZs60TICdRjoD.Ca1O9vZRVsZ768nGZHlGWu83KBo0kqe", userBd.getPassword()),
-                () -> assertEquals("admin@mail.com", userBd.getEmail())
+                () -> assertEquals("manager@mail.com", userBd.getEmail())
         );
     }
 
