@@ -59,7 +59,8 @@ public class CustomerServiceTest {
                 () -> assertEquals(1L, oldCustomer.getId()),
                 () -> assertEquals("Ivan", oldCustomer.getName()));
 
-        CustomerDto updateCustomerDto = customerService.update(customerDto);
+        customerService.update(customerDto);
+        Customer updateCustomerDto = customerService.getCustomerById(1L);
 
         assertAll(
                 () -> assertEquals(1L, updateCustomerDto.getId()),

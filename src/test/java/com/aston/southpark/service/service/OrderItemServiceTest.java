@@ -4,19 +4,16 @@ import com.aston.southpark.dto.OrderItemDto;
 import com.aston.southpark.dto.ProductDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.OrderItem;
-import com.aston.southpark.model.Product;
 import com.aston.southpark.service.OrderItemService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
 @SpringBootTest
 public class OrderItemServiceTest {
 
@@ -75,7 +72,8 @@ public class OrderItemServiceTest {
                 () -> assertEquals(BigDecimal.valueOf(200000), oldOrderItem.getPrice())
         );
 
-        OrderItemDto updateOrderItem = orderItemService.update(dto);
+        orderItemService.update(dto);
+        OrderItemDto updateOrderItem = orderItemService.getById(1L);
 
         assertAll(
                 () -> assertEquals(1L, updateOrderItem.getId()),
