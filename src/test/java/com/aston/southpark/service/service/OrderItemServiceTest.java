@@ -1,10 +1,11 @@
-package com.aston.southpark.service;
+package com.aston.southpark.service.service;
 
 import com.aston.southpark.dto.OrderItemDto;
 import com.aston.southpark.dto.ProductDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.OrderItem;
 import com.aston.southpark.model.Product;
+import com.aston.southpark.service.OrderItemService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

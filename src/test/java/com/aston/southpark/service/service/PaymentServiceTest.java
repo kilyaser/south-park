@@ -1,9 +1,10 @@
-package com.aston.southpark.service;
+package com.aston.southpark.service.service;
 
 
 import com.aston.southpark.dto.PaymentDto;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.Payment;
+import com.aston.southpark.service.PaymentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
