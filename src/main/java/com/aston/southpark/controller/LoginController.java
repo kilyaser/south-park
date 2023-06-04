@@ -23,7 +23,7 @@ public class LoginController {
     @Operation(summary = "To get token by username and password")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
-        UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
+        UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword()); // TODO: перместить в сервисный слой
 
         Authentication auth = authenticationProvider.authenticate(creds);
         UserDetails user = (UserDetails) auth.getPrincipal();

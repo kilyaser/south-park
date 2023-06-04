@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MaterialService {
 
-    private MaterialRepository materialRepository;
-    private MaterialConverter materialConverter;
+    private final MaterialRepository materialRepository;
+    private final MaterialConverter materialConverter;
 
     public Material create(MaterialDto materialDto) {
         return materialRepository.save(materialConverter.toEntity(materialDto));

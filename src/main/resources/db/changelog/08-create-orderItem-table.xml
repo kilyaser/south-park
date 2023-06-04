@@ -23,7 +23,7 @@
             </column>
 
             <column name="product_id" type="bigint">
-                <constraints foreignKeyName="order_item_product_id_fk" references="product(id)"/>
+                <constraints deleteCascade="true" foreignKeyName="order_item_product_id_fk" references="product(id)"/>
             </column>
 
         </createTable>

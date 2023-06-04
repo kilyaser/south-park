@@ -19,8 +19,12 @@ public class TechnologistConverter {
 
     public Technologist toEntity(TechnologistDto dto) {
         var technologist = new Technologist();
-        technologist.setName(dto.getName());
+
+        if (Objects.nonNull(dto.getId())) technologist.setId(dto.getId());
         if (Objects.nonNull(dto.getEmail())) technologist.setEmail(dto.getEmail());
+
+        technologist.setName(dto.getName());
+
         return technologist;
     }
 }

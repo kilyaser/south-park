@@ -10,25 +10,25 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="order_title" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
-            <column name="modified" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
-            <column name="total_cost" type="numeric(15,2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="completion" type="timestamp">
                 <constraints nullable="true"/>
             </column>
-            <column name="is_complected" type="boolean">
+            <column name="created" type="timestamp" defaultValue="now()">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified" type="timestamp" defaultValue="now()">
+                <constraints nullable="true"/>
+            </column>
+            <column name="total_cost" type="numeric(15,2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="completion" type="timestamp" defaultOnNull="true">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_complected" type="boolean" defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
             <column name="customer_id" type="bigint">
-                <constraints foreignKeyName="order_customer_id_fk" references="customer(id)"/>
+                <constraints nullable="false" foreignKeyName="order_customer_id_fk" references="customer(id)"/>
             </column>
         </createTable>
 

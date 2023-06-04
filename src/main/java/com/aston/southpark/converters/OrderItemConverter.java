@@ -2,12 +2,14 @@ package com.aston.southpark.converters;
 
 import com.aston.southpark.dto.OrderItemDto;
 import com.aston.southpark.model.OrderItem;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 @Component
+@RequiredArgsConstructor
 public class OrderItemConverter {
-
+    private final ProductConverter productConverter;
 
     public OrderItemDto mapToOrderItemDto(OrderItem orderItem) {
         var dto = new OrderItemDto();
@@ -15,15 +17,17 @@ public class OrderItemConverter {
         dto.setQuantity(orderItem.getQuantity());
         dto.setPrice(orderItem.getPrice());
         dto.setPricePerProduct(orderItem.getPricePerProduct());
+        dto.setProductDto(productConverter.entityToDto(orderItem.getProduct()));
         return dto;
     }
 
-    public OrderItem mapToOrderItemEntity(OrderItemDto orderItemDto) {
+    public OrderItem mapToOrderItemEntity(OrderItemDto dto) {
         var orderItem = new OrderItem();
-        orderItemDto.setId(orderItem.getId());
-        orderItemDto.setQuantity(orderItem.getQuantity());
-        orderItemDto.setPricePerProduct(orderItem.getPrice());
-        orderItemDto.setPricePerProduct(orderItem.getPricePerProduct());
+        orderItem.setId(dto.getId());
+        orderItem.setQuantity(dto.getQuantity());
+        orderItem.setPricePerProduct(dto.getPrice());
+        orderItem.setPricePerProduct(dto.getPricePerProduct());
+        orderItem.setProduct(productConverter.toEntity(dto.getProductDto()));
         return orderItem;
     }
 }

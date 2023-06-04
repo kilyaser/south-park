@@ -1,11 +1,16 @@
 package com.aston.southpark.service;
 
-import com.aston.southpark.dto.OrderDto;
+
+import com.aston.southpark.model.Customer;
+import com.aston.southpark.model.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class OrderServiceTest {
@@ -14,8 +19,54 @@ public class OrderServiceTest {
     private OrderService orderService;
 
     @Test
-    public void getOrderByIdTest() {
-        OrderDto orderDto = orderService.getById(1L);
-        assertEquals("авто", orderDto.getOrderTitle());
+    public void creatTest() {
+        Order order = new Order();
+        Customer customer = new Customer();
+        customer.setId(1L);
+        order.setCustomer(customer);
+
+        Order sevedOrder = orderService.create(order);
+
+        assertTrue(Objects.nonNull(sevedOrder.getId()));
     }
+
+    @Test
+    public void getByIdTest() {
+        Order o = orderService.getById(1L);
+
+        assertAll(
+                () -> assertEquals(1L, o.getId()),
+                () -> assertEquals("авто", o.getOrderTitle()),
+                () -> assertEquals(new BigDecimal("322123.23"), o.getTotalCost()),
+                () -> assertEquals(1L, o.getCustomer().getId())
+        );
+    }
+
+    @Test
+    public void getAllTest() {
+        int count = orderService.getAll().size();
+
+        assertTrue(count > 0);
+    }
+    @Test
+    public void updateTest() {
+        Order order = orderService.getById(2L);
+
+        assertAll(
+                () -> assertEquals(2L, order.getId()),
+                () -> assertEquals("квартира", order.getOrderTitle()),
+                () -> assertTrue(order.isComplected())
+        );
+
+        order.setOrderTitle("updated title");
+        order.setComplected(false);
+
+        Order updatedOrder = orderService.update(order);
+        assertAll(
+                () -> assertEquals(2L, updatedOrder.getId()),
+                () -> assertEquals("updated title", updatedOrder.getOrderTitle()),
+                () -> assertFalse(updatedOrder.isComplected())
+        );
+    }
+
 }

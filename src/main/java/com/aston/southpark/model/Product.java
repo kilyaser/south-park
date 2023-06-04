@@ -4,20 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.FetchType;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,20 +20,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_title", nullable = false)
+    @Column(name = "product_title")
     @NotBlank
-    @Size(max = 255)
     private String productTitle;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_type", columnDefinition = "enum")
+    private ProductType productType;
 
-    @Column(name = "product_type", nullable = false)
-    @NotBlank
-    @Size(max = 70)
-    private String productType;
-
-    @Column(name = "written_program", nullable = false)
+    @Column(name = "written_program")
     private boolean isProgramWritten;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "material_id")
     private Material material;
 
@@ -59,8 +44,22 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "technologist_id")
     private Technologist technologist;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productTitle='" + productTitle + '\'' +
+                ", productType=" + productType +
+                ", isProgramWritten=" + isProgramWritten +
+                ", material=" + material.getType() +
+                ", endDate=" + endDate +
+                ", preparation=" + preparation +
+                ", orderItems=" + orderItems +
+                ", technologist=" + technologist +
+                '}';
+    }
 }

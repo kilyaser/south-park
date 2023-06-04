@@ -4,14 +4,16 @@ import com.aston.southpark.dto.OrderDto;
 import com.aston.southpark.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Component
 @RequiredArgsConstructor
 public class OrderConverter {
-
     private final CustomerConverter customerConverter;
+    private final OrderItemConverter orderItemConverter;
 
     public OrderDto mapToOrderDto(Order order) {
         var dto = new OrderDto();
@@ -22,7 +24,14 @@ public class OrderConverter {
         dto.setCompletion(order.getCompletion());
         dto.setOrderTitle(order.getOrderTitle());
         dto.setComplected(order.isComplected());
-        dto.setCustomerDto(customerConverter.toDto(order.getCustomer()));
+
+        if (Objects.nonNull(order.getCustomer())) {
+            dto.setCustomerDto(customerConverter.toDto(order.getCustomer()));
+        }
+        if (Objects.nonNull(order.getOrderItems())) {
+            dto.setOrderItemDtos(order.getOrderItems().stream().map(orderItemConverter::mapToOrderItemDto).collect(Collectors.toList()));
+        }
+
         return dto;
     }
 
@@ -35,7 +44,14 @@ public class OrderConverter {
         order.setCompletion(orderDto.getCompletion());
         order.setOrderTitle(orderDto.getOrderTitle());
         order.setComplected(orderDto.isComplected());
-        order.setCustomer(customerConverter.toEntity(orderDto.getCustomerDto()));
+
+        if (Objects.nonNull(orderDto.getCustomerDto())) {
+            order.setCustomer(customerConverter.toEntity(orderDto.getCustomerDto()));
+        }
+        if (Objects.nonNull(orderDto.getOrderItemDtos())) {
+            order.setOrderItems(orderDto.getOrderItemDtos().stream().map(orderItemConverter::mapToOrderItemEntity).collect(Collectors.toList()));
+        }
+
         return order;
     }
 }
