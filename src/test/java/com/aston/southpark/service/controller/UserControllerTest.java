@@ -26,7 +26,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void addPaymentTest() throws Exception {
+    void addUserTest() throws Exception {
         UserDto dto = new UserDto();
         dto.setId(1L);
         dto.setUsername("testUser");
@@ -45,7 +45,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void getAllPaymentTest() throws Exception {
+    void getAllUserTest() throws Exception {
 
         mockMvc.perform(get("/api/v1/users"))
                 .andExpect(status().isOk())
@@ -54,7 +54,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void deletePaymentTest() throws Exception {
+    void deleteUserTest() throws Exception {
 
         mockMvc.perform(delete("/api/v1/users/1"))
                 .andExpect(status().isOk());
