@@ -20,7 +20,7 @@ public class MaterialConverter {
     public MaterialDto toDto(Material material) {
         MaterialDto materialDto = new MaterialDto();
         materialDto.setId(material.getId());
-        materialDto.setType(material.getType());
+        materialDto.setType(materialDto.getType());
         return materialDto;
     }
 }
