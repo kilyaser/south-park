@@ -1,7 +1,8 @@
-package com.aston.southpark.service;
+package com.aston.southpark.service.service;
 
 
 import com.aston.southpark.dto.TechnologistDto;
+import com.aston.southpark.service.TechnologistService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
