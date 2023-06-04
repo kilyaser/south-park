@@ -1,8 +1,9 @@
-package com.aston.southpark.service;
+package com.aston.southpark.service.service;
 
 import com.aston.southpark.converters.UserConverter;
 import com.aston.southpark.exception.ResourceNotFoundException;
 import com.aston.southpark.model.User;
+import com.aston.southpark.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
