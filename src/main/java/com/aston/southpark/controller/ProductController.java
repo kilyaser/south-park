@@ -17,7 +17,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("/{product}")
+    @GetMapping("/{id}")
     @Operation(summary = "Удаление информации о продукте")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное удаление", content = @Content(mediaType = "")),
