@@ -39,12 +39,8 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerDto update(CustomerDto customerDto) {
-        Customer customer = customerRepository.findById(customerDto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Customer with id = %d not found", customerDto.getId())));
-        customer.setName(customerDto.getName());
-        customer.setEmail(customerDto.getEmail());
-        customer.setPhone(customerDto.getPhone());
-        return customerDto;
+    public void update(CustomerDto dto) {
+        customerRepository.save(customerConverter.toEntity(dto));
     }
+
 }
