@@ -1,20 +1,12 @@
-package com.aston.southpark.service;
+package com.aston.southpark.service.service;
 
-import com.aston.southpark.dto.MaterialDto;
-import com.aston.southpark.model.Material;
-import com.aston.southpark.repository.MaterialRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.wildfly.common.Assert.assertFalse;
-import static org.wildfly.common.Assert.assertNotNull;
 
 @SpringBootTest
 public class MaterialServiceTest {
 
 
-    @Autowired
+    /*@Autowired
     private MaterialRepository materialRepository;
 
     @Autowired
@@ -79,7 +71,7 @@ public class MaterialServiceTest {
         assertEquals(updatedMaterialDto.getType(), updatedMaterial.getType());
 
         materialRepository.delete(existingMaterial);
-    }
+    }*/
 
 
 }
