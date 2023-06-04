@@ -27,12 +27,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    //cascade.All убрал, иначе ошибки при удалении лезут, т.к. хибер пытается удалить все записи, в тч и роль,
-    // на которую ссылаются другие сущности. Без cascade удаляется все правильно, только из юзера и юзер_роле, при
-    // в таблице роли все остается не тронутым.
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<Role> roles;
 }
