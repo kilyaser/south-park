@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/material")
 @RequiredArgsConstructor
@@ -17,7 +20,7 @@ public class MaterialController {
 
     private final MaterialService materialService;
 
-    @GetMapping("/{material}")
+    @GetMapping("/{id}")
     @Operation(summary = "Получение информации о материалах")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение", content = @Content(mediaType = "")),
@@ -28,6 +31,19 @@ public class MaterialController {
     })
     public ResponseEntity<?> getMaterialById(@PathVariable Long id) {
         return ResponseEntity.ok(materialService.getById(id));
+    }
+
+    @GetMapping("/{material-list}")
+    @Operation(summary = "Получение списка материалов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешное получение", content = @Content(mediaType = "")),
+            @ApiResponse(responseCode = "400", description = "Некорректный запрос", content = @Content(mediaType = "")),
+            @ApiResponse(responseCode = "401", description = "Авторизуйтесь для операции", content = @Content(mediaType = "")),
+            @ApiResponse(responseCode = "403", description = "доступ к запрошенному ресурсу запрещен", content = @Content(mediaType = "")),
+            @ApiResponse(responseCode = "500", description = "Сервер занят, напишите позже", content = @Content(mediaType = "")),
+    })
+    public ResponseEntity<Collection<MaterialDto>> getAllMaterial() {
+        return ResponseEntity.ok(materialService.getAllMaterial());
     }
 
     @PostMapping("/{material}")
