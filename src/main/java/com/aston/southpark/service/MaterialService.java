@@ -29,7 +29,7 @@ public class MaterialService {
     }
 
     public Collection<MaterialDto> getAllMaterial(){
-        return materialRepository.findAll().stream().map(MaterialConverter::toDto).collect(Collectors.toList());
+        return materialRepository.findAll().stream().map(materialConverter::toDto).collect(Collectors.toList());
     }
 
     @Transactional
