@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class MaterialService {
@@ -23,6 +26,10 @@ public class MaterialService {
     public Material getById(Long id) {
         return materialRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id = %d not found", id)));
+    }
+
+    public Collection<MaterialDto> getAllMaterial(){
+        return materialRepository.findAll().stream().map(MaterialConverter::toDto).collect(Collectors.toList());
     }
 
     @Transactional

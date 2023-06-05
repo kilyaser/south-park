@@ -23,12 +23,12 @@ public class OrderController {
     private final OrderConverter orderConverter;
 
     @GetMapping
-    @Operation(summary = "To get all orders from database")
+    @Operation(summary = "Получить все ордера")
     public List<OrderDto> getAllOrders() {
         return orderService.getAll().stream().map(orderConverter::mapToOrderDto).collect(Collectors.toList());
     }
 
-    @Operation(summary = "Create new order")
+    @Operation(summary = "Создать новый ордер")
     @PostMapping
     public OrderDto createOrder(@RequestBody OrderDto orderDto) {
         return orderConverter.mapToOrderDto(

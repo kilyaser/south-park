@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Login controller")
+@Tag(name = "Логин контроллер")
 @RestController
 @RequiredArgsConstructor
 @SecurityRequirement(name = "Bearer Authentication")
@@ -25,7 +25,7 @@ public class LoginController {
     private final JwtService jwtService;
     private final DaoAuthenticationProvider authenticationProvider;
 
-    @Operation(summary = "To get token by username and password")
+    @Operation(summary = "Получение токена по имени и паролю")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
         UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword()); // TODO: перместить в сервисный слой
