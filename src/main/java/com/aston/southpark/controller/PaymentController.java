@@ -38,7 +38,7 @@ public class PaymentController {
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Удалииь платеж по id")
+    @Operation(summary = "Удалить платеж по id")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePayment(@PathVariable Long id) {
         paymentService.remove(id);
